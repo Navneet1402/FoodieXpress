@@ -3,13 +3,13 @@ import React from 'react'
 import CartItem from './CartItem'
 import AddressCard from './AddressCard'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
-import { ErrorMessage, Field, Formik } from 'formik'
+import { ErrorMessage, Field,  Form,  Formik } from 'formik'
 // import * as Yup from "yup"
 
-const style = {
+export const style = {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
+    top: '20%',
+    left: '40%',
     transform: 'translated(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
@@ -41,7 +41,8 @@ const Cart = () => {
     const handleOpenAddressModal = () => setOpen(true);
     const [open, setOpen] = React.useState(false);
     const handleClose = () => setOpen(false);
-    const handleSubmit=()=>{
+    const handleSubmit=(values)=>{
+        console.log("form value", values)
 
     }
 
@@ -129,8 +130,10 @@ const Cart = () => {
                 <Box sx={style}>
                     <Formik initialValues={initialValues}
                     // validationSchema={validationSchema}
-                    onSubmit={handleSubmit}>
+                    onSubmit={handleSubmit}
+                    >
 
+                        <Form>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <Field
@@ -213,11 +216,11 @@ const Cart = () => {
                             </Grid>
 
                         </Grid>
+                        </Form>
+
                         
-
-
+                       
                     </Formik>
-
                 </Box>
 
             </Modal>
