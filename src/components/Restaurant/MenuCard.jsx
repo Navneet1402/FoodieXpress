@@ -7,12 +7,12 @@ import Checkbox from '@mui/material/Checkbox';
 
 const demo = [
   {
-    category: "Nuts and Seeds",
+    categoryBean: "Nuts and Seeds",
     ingredients: ["Cashews"]
   },
 
   {
-    category: "Bread",
+    categoryBean: "Bread",
     ingredients: ["Hamburger buns","Normal Buns"],
     
   },
@@ -52,7 +52,7 @@ const MenuCard = () => {
             {
               demo.map((item)=>
               <div>
-                <p>{item.category}</p>
+                <p>{item.categoryBean}</p>
                 <FormGroup>
                   {item.ingredients.map((item)=> 
                   <FormControlLabel control={<Checkbox onChange={()=> handleCheckBoxChange(item)}/>} label={item}/>)}
