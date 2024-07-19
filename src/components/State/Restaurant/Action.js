@@ -1,4 +1,6 @@
-import { api } from "../../../config/api";
+
+
+import { api } from "../../Config/api";
 import {
   CREATE_CATEGORY_FAILURE,
   CREATE_CATEGORY_REQUEST,
@@ -278,6 +280,7 @@ export const getRestaurantCategory = ({  jwt, restaurantId }) => {
       console.log("get restaurant category", res.data);
       dispatch({ type: GET_RESTAURANTS_CATEGORY_SUCCESS, payload: res.data });
     } catch (error) {
+      console.log("catch error", error)
       dispatch({ type: CREATE_CATEGORY_FAILURE, payload: error });
     }
   };

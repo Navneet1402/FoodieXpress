@@ -1,7 +1,10 @@
 import React from 'react'
 import RestaurantCard from '../Restaurant/RestaurantCard'
+import { useSelector } from 'react-redux'
+import { store } from '../State/store'
 
 const Favourites = () => {
+  const {auth}=useSelector(store=>store)
   return (
     <div>
       <h1 className='py-5 text-x1 font-semibold text-center'>
@@ -10,7 +13,7 @@ const Favourites = () => {
 
       <div className='flex flex-wrap gap-3 justify-center'>
         {
-          [1,1,1,1].map((item)=><RestaurantCard/>)
+          auth.favourites.map((item)=><RestaurantCard item={item}/>)
         }
 
       </div>

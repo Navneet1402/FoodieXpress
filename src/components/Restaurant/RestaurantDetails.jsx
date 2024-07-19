@@ -1,17 +1,14 @@
 import { Divider, FormControl, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuCard from './MenuCard';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRestaurantCategory } from '../State/Restaurant/Action';
 
 
-const categories = [
-    "pizza",
-    "Biryani",
-    "Burger",
-    "Tacos",
-    "Cake"
-]
+
 
 const foodTypes = [
     {
@@ -28,14 +25,49 @@ const foodTypes = [
     }
 ]
 
-const menu=[1,1,1,1,1,1,1,]
+const menu = [1, 1, 1, 1, 1, 1, 1,]
 
 const RestaurantDetails = () => {
-    const [foodType,setFoodType]=useState("all")
+    const [foodType, setFoodType] = useState("all")
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const jwt = localStorage.getItem("jwt")
+    const { auth, restaurant, menu } = useSelector(store => store);
+    const [selectedCategory, setSelectedCategory] = useState("")
+
+    const { id, city } = useParams();
 
     const handleFilter = (e) => {
-        console.log(e.target.value, e.target.name)
+        setFoodType(e.target.value)
+        console.log(e.target.value,e.target.name)
     }
+
+    const handleFilterCategory = (e,value) => {
+        setSelectedCategory(value)
+        console.log(e.target.value, e.target.name,value)
+    }
+
+    console.log("restaurant", restaurant)
+
+    useEffect(() => {
+        dispatch(getRestaurantById({ jwt, restaurantId: id }));
+        dispatch(getRestaurantCategory({ jwt, restaurantId: id }));
+
+
+    }, []);
+
+    useEffect(() => {
+        dispatch(
+            getMenuItemsByRestaurantId({ 
+                jwt, 
+                restaurantId: id, 
+                vegetarian: foodType==="vegetarian", 
+                nonveg:foodType==="non vegetarian", 
+                seasonal: foodType==="seasonal",
+                foodCategory: selectedCategory, 
+            })
+        );
+    },[selectedCategory])
     return (
         <div className='px-5 lg:px-20'>
 
@@ -45,7 +77,7 @@ const RestaurantDetails = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <img className='w-full h-[40vh] object-cover'
-                                src="https://www.architectandinteriorsindia.com/cloud/2021/11/15/Story-3-1.gif"
+                                src={restaurant.restaurant?.images[0]}
                                 alt=""
                             />
 
@@ -53,7 +85,7 @@ const RestaurantDetails = () => {
 
                         <Grid item xs={12} lg={6}>
                             <img className='w-full h-[40vh] object-cover'
-                                src="https://assets.architecturaldigest.in/photos/600831aba8f8397741703c46/16:9/w_2560%2Cc_limit/1411-1366x768.jpg"
+                                src={restaurant.restaurant?.images[1]}
                                 alt=""
                             />
 
@@ -71,8 +103,8 @@ const RestaurantDetails = () => {
                 </div>
 
                 <div className='pt-3 pb-5'>
-                    <h1 className='text-4x1 font-semibold'>Indian fast food</h1>
-                    <p className='text-gray-500 mt-1 '>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem dignissimos excepturi alias deserunt dolore impedit officiis doloribus illo a dolorem. Sunt amet nulla pariatur quia magni sint nesciunt iure deserunt.</p>
+                    <h1 className='text-4x1 font-semibold'>{restaurant.restaurant?.name}</h1>
+                    <p className='text-gray-500 mt-1 '>{restaurant.restaurant?.description}</p>
 
                     <div className='space-y-3 mt-3'>
                         <p className='text-gray-500 flex items-center gap-3'>
@@ -109,19 +141,19 @@ const RestaurantDetails = () => {
                             <FormControl className='py-10 space-y-5' component={"fieldset"}>
                                 <RadioGroup onChange={handleFilter} name='food_type' value={foodType}>
                                     {foodTypes.map((item) => (
-                                    <FormControlLabel
-                                    key={item.value}
-                                     value={item.value} 
-                                     control={<Radio />} 
-                                     label={item.label} 
-                                     />
-                                     ))}
+                                        <FormControlLabel
+                                            key={item.value}
+                                            value={item.value}
+                                            control={<Radio />}
+                                            label={item.label}
+                                        />
+                                    ))}
 
                                 </RadioGroup>
                             </FormControl>
 
                         </div>
-                        <Divider/>
+                        <Divider />
 
                         <div>
                             <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>
@@ -129,15 +161,18 @@ const RestaurantDetails = () => {
                             </Typography>
 
                             <FormControl className='py-10 space-y-5' component={"fieldset"}>
-                                <RadioGroup onChange={handleFilter} name='food_type' value={foodType}>
-                                    {categories.map((item) => (
-                                    <FormControlLabel
-                                    key={item}
-                                     value={item} 
-                                     control={<Radio />} 
-                                     label={item} 
-                                     />
-                                     ))}
+                                <RadioGroup onChange={handleFilterCategory}
+                                 name='food_category'
+                                 value={selectedCategory}
+                                 >
+                                    {restaurant.categories.map((item) => (
+                                        <FormControlLabel
+                                            key={item}
+                                            value={item.name}
+                                            control={<Radio />}
+                                            label={item.name}
+                                        />
+                                    ))}
 
                                 </RadioGroup>
                             </FormControl>
@@ -149,8 +184,8 @@ const RestaurantDetails = () => {
                 </div>
 
                 <div className="space-y-5 lg:w-[80%] lg:pl-10">
-                    
-                    {menu.map((item)=><MenuCard/>)}
+
+                    {menu.menuItems.map((item) => <MenuCard item={item} />)}
 
                 </div>
 

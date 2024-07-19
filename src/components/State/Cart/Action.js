@@ -7,6 +7,7 @@ import {
   CLEAR_CART_REQUEST,
   CLEAR_CART_SUCCESS,
   FIND_CART_FAILURE,
+  FIND_CART_REQUEST,
   FIND_CART_SUCCESS,
   GET_ALL_CART_ITEMS_FAILURE,
   GET_ALL_CART_ITEMS_REQUEST,
@@ -23,13 +24,15 @@ export const findCart = (token) => {
   return async (dispatch) => {
     dispatch({ type: FIND_CART_REQUEST });
     try {
-      const response = await api.get("/api/cart/", {
+      const response = await api.get("/api/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("my cart",response.data)
       dispatch({ type: FIND_CART_SUCCESS, payload: response.data });
     } catch (error) {
+      console.log("error", error)
       dispatch({ type: FIND_CART_FAILURE, payload: error });
     }
   };
