@@ -161,7 +161,8 @@ const RestaurantDetails = () => {
                             </Typography>
 
                             <FormControl className='py-10 space-y-5' component={"fieldset"}>
-                                <RadioGroup onChange={handleFilterCategory}
+                                <RadioGroup 
+                                onChange={handleFilterCategory}
                                  name='food_category'
                                  value={selectedCategory}
                                  >

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllRestaurantsAction } from '../State/Restaurant/Action'
 import { useNavigate } from 'react-router-dom'
 
-// const restaurant=[1,1,1,1,1,1,1,1,1,1]
+const restaurants=[]
 const Home = () => {
   const dispatch=useDispatch()
   const jwt= localStorage.getItem("jwt")
@@ -50,12 +50,8 @@ const Home = () => {
       </section>
 
       <section className='px-5 lg:px-20 pt-10'>
-        <h1 className='text-2x1 font-semibold text-gray-400 pb-8'>Order From Our Handpicked Favourites</h1>
-        <div className='flex flex-wrap items-center justify-around gap-5'>
-          {
-            restaurant.map((item)=> <RestaurantCard item={item}/>)
-
-          }
+        <h1 className='text-2xl font-semibold text-gray-400 pb-8'>Order From Our Handpicked Favourites</h1>
+        <div className='flex flex-wrap items-center justify-around gap-5'>{restaurant.restaurants.map((item) => <RestaurantCard key={item.id} item={item} />)}
         </div>
       </section>
 

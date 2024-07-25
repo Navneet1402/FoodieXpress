@@ -41,7 +41,8 @@ export const getMenuItemByRestaurantId = (reqData) => {
     dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST });
     try {
       const { data } = await api.get(
-        `api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}&nonveg=${reqData.nonveg}
+        `api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}
+        &nonveg=${reqData.nonveg}
         &seasonal=${reqData.seasonal}&food_category=${reqData.foodCategory}`,
         {
           headers: {
@@ -106,7 +107,7 @@ export const updateMenuItemsAvailability = ({ foodId, jwt }) => {
     dispatch({ type: UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST });
     try {
       const { data } = await api.get(
-        `api/admin/food/${foodId}`,
+        `/api/admin/food/${foodId}`,
         {},
         {
           headers: {
@@ -123,8 +124,8 @@ export const updateMenuItemsAvailability = ({ foodId, jwt }) => {
   };
 };
 
-export const deleteFoodAction = ({ foodId, jwt }) => {
-  return async (dispatch) => {
+export const deleteFoodAction = ({ foodId, jwt }) => 
+  async (dispatch) => {
     dispatch({ type: DELETE_MENU_ITEM_REQUEST });
     try {
       const { data } = await api.delete(`api/admin/food${foodId}`, {
@@ -138,4 +139,4 @@ export const deleteFoodAction = ({ foodId, jwt }) => {
       dispatch({ type: DELETE_MENU_ITEM_FAILURE, payload: error });
     }
   };
-};
+

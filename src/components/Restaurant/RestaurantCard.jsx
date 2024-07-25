@@ -30,36 +30,32 @@ const RestaurantCard = ({ item }) => {
 
             <div className={`${true ? "cursor-pointer" : "cursor-not-allowed"} relative`}>
                 <img className='w-full h-[10rem] rouded-t-md object-cover'
-                 src="https://th.bing.com/th/id/OIP.2dhr5Ln6cMHIu9SmwE_uBgHaE7?w=302&h=201&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                 
-                //  {
-                //     item.image[1]
-                //     } 
-                    
-                    alt="" srcset="" />
+                 src={item.image[1]} 
+                    alt=""/>
 
                 <Chip
                     size="small"
                     className="absolute top-2 left-2"
-                    // color={item.open? "success" : "error"}
-                    // label={item.open? "open" : "closed"}
+                    color={item.open? "success" : "error"}
+                    label={item.open? "open" : "closed"}
                 />
             </div>
 
             <div className='p-4 textPart lg:flex w-full justify-between'>
                 <div className="space-y-1">
-                    <p onClick={handleNavigateToRestaurant} className='font-semibold text-lg cursor-pointer'>pizza
-                        {/* {item.name} */}
+                    <p onClick={handleNavigateToRestaurant} className='font-semibold text-lg cursor-pointer'>
+                        {item.name}
                         </p>
                     <p className='text-gray-500 text-sm'>food
-                         {/* {item.description} */}
+                         {item.description}
                          </p>
 
                 </div>
 
                 <div>
                     <IconButton onClick={handleAddToFavourite}>
-                        {isPresentInFavourites(auth.favourites,item)? <FavoriteIcon /> : <FavoriteBorderIcon />}
+                        {isPresentInFavourites(auth.favourites,item)?
+                         <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </IconButton>
                 </div>
 

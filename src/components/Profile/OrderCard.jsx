@@ -17,7 +17,7 @@ const OrderCard = ({item,order}) => {
             </div>
             <div>
                 <Button variant='contained'  className='cursor-not-allowed'>
-                    {item.orderStatus}
+                    {order.orderStatus}
 
                 </Button>
             </div>

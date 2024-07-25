@@ -54,7 +54,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         favourites: isPresentInFavourites(state.favourites, action.payload)
-          ? state.favourites.filter((item) => item._id !== action.payload._id)
+          ? state.favourites.filter((item) => item.id!==action.payload.id)
           : [action.payload, ...state.favourites],
         error: null,
         success: "add to favourite success",

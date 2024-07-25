@@ -12,6 +12,7 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   GET_USER_SUCCESS,
+  LOGIN_SUCCESS,
 } from "./ActionType";
 import { api, API_URL } from "../../Config/api";
 
@@ -25,7 +26,8 @@ export const registerUser = (reqData) => async (dispatch) => {
     if (data.jwt) localStorage.setItem("jwt", data.jwt);
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       reqData.navigate("/admin/restaurant");
-    } else {
+    } 
+    else {
       reqData.navigate("/");
     }
 
@@ -47,7 +49,8 @@ export const loginUser = (reqData) => async (dispatch) => {
     if (data.jwt) localStorage.setItem("jwt", data.jwt);
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       reqData.navigate("/admin/restaurant");
-    } else {
+    }
+     else {
       reqData.navigate("/");
     }
 
@@ -62,9 +65,9 @@ export const loginUser = (reqData) => async (dispatch) => {
 export const getUser = (jwt) => async (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   try {
-    const { data } = await api.get(`/api/users/profile`, {
+    const {data} = await api.get(`/api/users/profile`, {
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${jwt}`
       },
     });
     dispatch({ type: GET_USER_SUCCESS, payload: data});
@@ -75,12 +78,12 @@ export const getUser = (jwt) => async (dispatch) => {
   }
 };
 
-export const addToFavourite = (jwt, restaurantId) => async (dispatch) => {
+export const addToFavourite = ({jwt, restaurantId}) => async (dispatch) => {
   dispatch({ type: ADD_TO_FAVOURITES_REQUEST });
   try {
       const { data } = await api.put(
-      `/auth/restaurants/${restaurantId}/
-      add-favorite`,{},
+      `/api/auth/restaurants/${restaurantId}/
+      add-favourites`,{},
       {
         headers: {
           Authorization: `Bearer ${jwt}`,

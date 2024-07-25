@@ -60,7 +60,6 @@ const Cart = () => {
             }
         }
         dispatch(createOrder(data))
-
         console.log("form value", values)
 
     }
@@ -70,7 +69,7 @@ const Cart = () => {
             <main className='lg:flex justify-between'>
                 <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10'>
 
-                    {cart.cartItems.map(() => <CartItem item={items} />)}
+                    {cart.cartItems.map((item) => <CartItem item={item} />)}
 
                     <Divider />
                     <div className="billDetails px-5 text-sm">

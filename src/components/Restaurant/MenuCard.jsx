@@ -24,8 +24,8 @@ const demo = [
 
 
 
-const MenuCard = (item) => {
-  const [selectedIngredients, setSelectedIngredients] = useState[{}]
+const MenuCard = ({item}) => {
+  const [selectedIngredients, setSelectedIngredients] = useState([])
   const dispatch=useDispatch()
   const handleCheckBoxChange = (itemName) => {
     console.log("value",itemName)
@@ -37,7 +37,7 @@ const MenuCard = (item) => {
 
 
   }
-  const handleAddItemToCart = () => {
+  const handleAddItemToCart = (e) => {
     e.preventDefault()
     const reqData = {
       token: localStorage.getItem("jwt"),

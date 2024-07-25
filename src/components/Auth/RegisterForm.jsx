@@ -13,14 +13,15 @@ const initialValues = {
     password: "",
     role: "ROLE_CUSTOMER"
 }
-const RegisterForm = () => {
-    const navigate = useNavigate()
-    const dispatch=useDispatch()
+export default function RegisterForm ()  {
+    const navigate = useNavigate();
+    const dispatch=useDispatch();
+
     const handleSubmit = (values) => {
         console.log("form values", values)
         dispatch(registerUser({userData:values,navigate}))
 
-    }
+    };
     return (
         <div>
             <Typography variant='h5' className='text-center'>
@@ -32,7 +33,7 @@ const RegisterForm = () => {
 
                     <Field
                         as={TextField}
-                        name="full Name"
+                        name="fullName"
                         label="Full-Name"
                         fullWidth
                         variant="outlined"
@@ -69,7 +70,7 @@ const RegisterForm = () => {
     // onChange={handleChange}
   >
     <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-    <MenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant owner</MenuItem>
+    <MenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant Owner</MenuItem>
     
   </Field>
 
@@ -94,4 +95,3 @@ const RegisterForm = () => {
     )
 }
 
-export default RegisterForm
