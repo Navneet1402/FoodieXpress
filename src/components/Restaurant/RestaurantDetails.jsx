@@ -6,6 +6,7 @@ import MenuCard from './MenuCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRestaurantCategory } from '../State/Restaurant/Action';
+import { getMenuItemByRestaurantId } from '../State/Menu/Action';
 
 
 
@@ -58,7 +59,7 @@ const RestaurantDetails = () => {
 
     useEffect(() => {
         dispatch(
-            getMenuItemsByRestaurantId({ 
+            getMenuItemByRestaurantId({ 
                 jwt, 
                 restaurantId: id, 
                 vegetarian: foodType==="vegetarian", 

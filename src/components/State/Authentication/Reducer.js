@@ -22,6 +22,7 @@ const initialState = {
   jwt: null,
   favourites: [],
   success: null,
+  role:null
 };
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,6 +40,7 @@ export const authReducer = (state = initialState, action) => {
         jwt: action.payload,
         error: null,
         success: "register success",
+       
       };
 
     case GET_USER_SUCCESS:

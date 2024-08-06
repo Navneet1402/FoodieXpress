@@ -69,8 +69,8 @@ export default function RegisterForm ()  {
     // label="Role"
     // onChange={handleChange}
   >
-    <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-    <MenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant Owner</MenuItem>
+    <MenuItem value={ROLE_CUSTOMER}>Customer</MenuItem>
+    <MenuItem value={ROLE_RESTAURANT_OWNER}>Restaurant Owner</MenuItem>
     
   </Field>
 

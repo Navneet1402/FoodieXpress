@@ -16,6 +16,7 @@ export const Navbar = () => {
     const navigate = useNavigate()
 
     const handleAvatarClick = () => {
+        console.log("Auth object:", auth);
         if (auth.user?.role === "ROLE_CUSTOMER") {
             navigate("/my-profile")
         }

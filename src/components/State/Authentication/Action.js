@@ -68,7 +68,7 @@ export const getUser = (jwt) => async (dispatch) => {
     const {data} = await api.get(`/api/users/profile`, {
       headers: {
         Authorization: `Bearer ${jwt}`
-      },
+      }
     });
     dispatch({ type: GET_USER_SUCCESS, payload: data});
     console.log("user profile", data);

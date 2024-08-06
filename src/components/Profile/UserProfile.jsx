@@ -1,9 +1,18 @@
 import React from 'react'
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Button } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { logout } from '../State/Authentication/Action';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
+  const dispatch=useDispatch()
+  const navigate=useNavigate()
+
   const handleLogout = () => {
+    dispatch(logout())
+    navigate("/")
+    
 
   }
   return (
